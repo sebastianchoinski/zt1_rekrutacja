@@ -1,0 +1,22 @@
+{
+  "order": { "item": "SZAFKA", "quantity": 10 },
+  "items": [
+    { "code": "SZAFKA", "unit": "szt" },
+    { "code": "KORPUS", "unit": "szt" },
+    { "code": "PLYTA", "unit": "m2", "purchasePack": 5.8 },
+    { "code": "OBRZEZE", "unit": "mb" },
+    { "code": "ZAWIAS", "unit": "szt" }
+  ],
+  "bom": [
+    { "parent": "SZAFKA", "component": "KORPUS", "quantity": 1, "wastePct": 0 },
+    { "parent": "SZAFKA", "component": "ZAWIAS", "quantity": 2, "wastePct": 0 },
+    { "parent": "SZAFKA", "component": "PLYTA", "quantity": 0.5, "wastePct": 10 },
+    { "parent": "KORPUS", "component": "PLYTA", "quantity": 1.5, "wastePct": 10 },
+    { "parent": "KORPUS", "component": "OBRZEZE", "quantity": 6, "wastePct": 5 }
+  ],
+  "stock": [
+    { "item": "KORPUS", "quantity": 4 },
+    { "item": "PLYTA", "quantity": 3 },
+    { "item": "ZAWIAS", "quantity": 5 }
+  ]
+}
