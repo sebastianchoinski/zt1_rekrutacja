@@ -1,0 +1,364 @@
+.editor {
+  min-width: 0;
+}
+.tabs {
+  display: flex;
+  gap: 28px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 20px;
+  button {
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: none;
+    padding: 0 0 14px;
+    font-size: 14px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  button[aria-selected='true'] {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+    font-weight: 500;
+  }
+}
+.viewBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 9px;
+  p {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  > div {
+    display: flex;
+    padding: 3px;
+    background: var(--subtle);
+    border-radius: 5px;
+  }
+  button {
+    font-size: 11px;
+    border: 0;
+    border-radius: 3px;
+    background: none;
+    color: var(--muted);
+    padding: 4px 9px;
+  }
+  button[aria-pressed='true'] {
+    background: var(--surface);
+    color: var(--ink);
+    box-shadow: 0 1px 3px #14182015;
+  }
+}
+.scroll {
+  overflow-x: auto;
+}
+.scroll table {
+  min-width: 360px;
+}
+.bomTable,
+.stockTable,
+.catalogTable {
+  th:nth-child(2),
+  th:nth-child(3),
+  td:nth-child(2),
+  td:nth-child(3) {
+    text-align: center;
+  }
+  td:nth-child(2) input,
+  td:nth-child(3) input {
+    text-align: center;
+  }
+  .numberField {
+    align-items: center;
+  }
+}
+.bomTable {
+  th:nth-child(2) {
+    width: 84px;
+  }
+  th:nth-child(3) {
+    width: 100px;
+  }
+  th:last-child {
+    width: 28px;
+  }
+}
+.scroll table tbody tr:hover:not(.rootRow):not(.assemblyRow) {
+  background: #fafbfc;
+}
+.bomTable td:last-child,
+.bomTable th:last-child,
+.catalogTable td:last-child,
+.catalogTable th:last-child {
+  padding-right: 2px;
+}
+.scroll table th:first-child {
+  padding-left: 2px;
+}
+.treeCell {
+  position: relative;
+}
+.treeGuides {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.treeGuide,
+.treeStem {
+  position: absolute;
+  bottom: -1px;
+  border-left: 1px solid #c9cdd4;
+}
+.treeGuide {
+  top: 0;
+  &[data-last='true'] {
+    bottom: 50%;
+  }
+}
+.treeStem {
+  top: 50%;
+}
+.treeBranch {
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  border-top: 1px solid #c9cdd4;
+}
+.treeLabel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+  overflow-wrap: anywhere;
+}
+.code {
+  font-size: 13px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.expand {
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: var(--surface);
+  width: 24px;
+  height: 28px;
+  padding: 0;
+  flex-shrink: 0;
+  color: var(--muted);
+  svg {
+    display: block;
+    transition: transform 120ms ease;
+  }
+  &[aria-expanded='true'] svg {
+    transform: rotate(90deg);
+  }
+  &:focus-visible {
+    outline-offset: -2px;
+  }
+}
+.leafMark {
+  width: 24px;
+  height: 28px;
+  flex-shrink: 0;
+}
+.assemblyRow {
+  .code {
+    font-weight: 600;
+  }
+}
+.rootRow th {
+  font-weight: 500;
+}
+.rootRow .code {
+  font-size: 13px;
+  font-weight: 600;
+}
+.numberField {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 100%;
+  vertical-align: middle;
+  input {
+    width: 72px;
+    max-width: 100%;
+    padding: 6px 9px;
+    height: 32px;
+    text-align: right;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    border-color: var(--border);
+    background: var(--surface);
+  }
+  input:hover {
+    border-color: #a6abb5;
+  }
+  input:focus {
+    background: #fff;
+  }
+  input[aria-invalid='true'] {
+    border-color: var(--error);
+    background: #fff5f5;
+  }
+}
+.withUnit {
+  display: inline-flex;
+  position: relative;
+  > span:last-child {
+    position: absolute;
+    left: calc(100% + 6px);
+    top: 9px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  input {
+    width: 60px;
+  }
+}
+.fieldError {
+  display: block;
+  text-align: left;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--error);
+  margin-top: 5px;
+  max-width: 180px;
+}
+.remove {
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 20px;
+  width: 26px;
+  height: 32px;
+  opacity: 0;
+  padding: 0;
+  &:hover {
+    color: var(--error);
+  }
+}
+tr:hover .remove,
+tr:focus-within .remove,
+.remove:focus-visible {
+  opacity: 1;
+}
+tr:hover .remove:disabled {
+  opacity: 0.25;
+}
+.footnote {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-top: 14px;
+}
+.empty {
+  padding: 20px 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.addButton {
+  margin-top: 12px;
+}
+.addLine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-end;
+  margin-top: 23px;
+  label {
+    flex: 1;
+    min-width: 100px;
+    font-size: 11px;
+  }
+  label input {
+    display: block;
+    width: 100%;
+    height: 36px;
+    padding: 0 8px;
+    margin-top: 7px;
+    font-size: 12px;
+  }
+  > button {
+    min-height: 36px;
+    padding: 6px 12px;
+  }
+  > p {
+    flex-basis: 100%;
+    max-width: none;
+  }
+  .newUnit {
+    width: 120px;
+    min-width: 120px;
+    flex: none;
+  }
+}
+.relation {
+  display: block;
+  color: var(--muted);
+  margin-top: 4px;
+  font-size: 11px;
+}
+.unitSelect {
+  width: 104px;
+  margin-inline: auto;
+  --select-height: 34px;
+  --select-font-size: 12px;
+}
+.addField {
+  flex: 1;
+  min-width: 110px;
+  font-size: 11px;
+  --select-height: 36px;
+  --select-font-size: 12px;
+  > span {
+    display: block;
+    margin-bottom: 7px;
+  }
+}
+.catalogTable .remove {
+  opacity: 1;
+  &:disabled {
+    opacity: 0.25;
+  }
+}
+.muted {
+  color: var(--muted);
+  font-size: 12px;
+}
+@media (hover: none) {
+  .remove {
+    opacity: 1;
+  }
+  .remove:disabled {
+    opacity: 0.25;
+  }
+}
+@media (max-width: 700px) {
+  .tabs {
+    gap: 24px;
+    button {
+      font-size: 13px;
+    }
+  }
+  .viewBar {
+    p {
+      max-width: 170px;
+      line-height: 1.5;
+    }
+  }
+  .numberField input {
+    min-height: 38px;
+  }
+  .remove {
+    min-height: 40px;
+  }
+  .addLine label {
+    flex-basis: calc(50% - 10px);
+  }
+}
