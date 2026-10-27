@@ -1,0 +1,126 @@
+.loading {
+  min-width: 0;
+}
+.status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.spinner {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  border: 1.5px solid var(--border);
+  border-top-color: var(--ink);
+  border-radius: 50%;
+  animation: rotate 800ms linear infinite;
+}
+.skeleton {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  overflow: hidden;
+}
+.bar {
+  display: block;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--line);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+.order {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 26px 24px;
+  border-bottom: 1px solid var(--line);
+  .bar {
+    height: 38px;
+    width: 24%;
+    max-width: 260px;
+  }
+  .bar:nth-child(2) {
+    width: 80px;
+  }
+  .bar:last-child {
+    width: 180px;
+    margin-left: auto;
+  }
+}
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.13fr);
+  padding: 24px;
+  gap: 28px;
+}
+.panel + .panel {
+  border-left: 1px solid var(--line);
+  padding-left: 28px;
+}
+.title {
+  width: 38%;
+  height: 17px;
+  margin: 10px 0 28px;
+}
+.subtitle {
+  width: 44%;
+  height: 15px;
+  margin: 30px 0 16px;
+}
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 16% 16%;
+  align-items: center;
+  gap: 24px;
+  min-height: 54px;
+  border-bottom: 1px solid var(--line);
+  .bar:first-child {
+    width: 58%;
+  }
+  &:nth-child(even) .bar:first-child {
+    width: 74%;
+  }
+}
+.history {
+  padding: 8px 20px 20px;
+  .row {
+    grid-template-columns: minmax(0, 1fr) 12% 24%;
+    min-height: 66px;
+  }
+}
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+@media (max-width: 1000px) {
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .panel + .panel {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 24px 0 0;
+  }
+}
+@media (max-width: 700px) {
+  .columns,
+  .order {
+    padding: 18px;
+  }
+  .order {
+    gap: 14px;
+  }
+  .row {
+    gap: 16px;
+  }
+}

@@ -1,0 +1,41 @@
+.dialog {
+  width: min(580px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 16px 60px #14182025;
+  &::backdrop {
+    background: #14182066;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  h2 {
+    font-size: 21px;
+    letter-spacing: -0.4px;
+  }
+  header button {
+    border: 0;
+    background: none;
+    font-size: 25px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    color: var(--muted);
+  }
+}
+.wide {
+  width: min(760px, calc(100vw - 32px));
+}
+@media (max-width: 600px) {
+  .dialog {
+    padding: 20px;
+  }
+}
