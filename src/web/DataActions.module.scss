@@ -1,0 +1,52 @@
+.actions {
+  position: relative;
+}
+.trigger {
+  cursor: pointer;
+  list-style: none;
+  gap: 10px;
+  &::-webkit-details-marker {
+    display: none;
+  }
+  &[aria-disabled='true'] {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  svg {
+    flex: none;
+    transform: rotate(90deg);
+  }
+}
+.actions[open] .trigger svg {
+  transform: rotate(-90deg);
+}
+.menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  min-width: 190px;
+  padding: 5px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 8px 24px #1418201a;
+  button {
+    display: block;
+    width: 100%;
+    border: 0;
+    border-radius: 4px;
+    background: none;
+    padding: 10px;
+    text-align: left;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  button:hover,
+  button:focus-visible {
+    background: var(--subtle);
+  }
+  button:focus-visible {
+    outline-offset: -2px;
+  }
+}
