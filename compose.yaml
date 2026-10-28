@@ -1,0 +1,76 @@
+name: material-requirements
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: materials
+      POSTGRES_PASSWORD: materials
+      POSTGRES_DB: materials
+    ports:
+      - '127.0.0.1:5434:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U materials -d materials']
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build:
+      context: .
+      target: dev
+    environment:
+      DATABASE_URL: postgresql://materials:materials@db:5432/materials
+      PORT: 3002
+      HOST: 0.0.0.0
+    command: sh -c "npm run db:migrate && npm run dev:api"
+    volumes:
+      - ./src:/app/src:ro
+      - ./tests:/app/tests:ro
+      - ./examples:/app/examples:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://127.0.0.1:3002/api/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))",
+        ]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  web:
+    build:
+      context: .
+      target: dev
+    environment:
+      API_URL: http://api:3002
+    command: npm run dev:web -- --host 0.0.0.0
+    ports:
+      - '127.0.0.1:5175:5175'
+    volumes:
+      - ./src:/app/src:ro
+      - ./examples:/app/examples:ro
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://127.0.0.1:5175').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))",
+        ]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  postgres_data:
